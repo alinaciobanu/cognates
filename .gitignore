@@ -1,0 +1,13 @@
+# build folder
+/target
+
+# class files
+*.class
+
+# executable files
+*.exe
+
+# package files
+*.jar
+
+
