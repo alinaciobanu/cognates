@@ -10,4 +10,7 @@
 # package files
 *.jar
 
-
+# settings files
+/.settings
+.classpath
+.project
