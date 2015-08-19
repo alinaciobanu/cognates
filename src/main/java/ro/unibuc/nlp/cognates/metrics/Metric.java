@@ -8,6 +8,7 @@ package ro.unibuc.nlp.cognates.metrics;
 public interface Metric {
 	
 	/**
+	 * Computes the normalized distance between the input strings.
 	 * 
 	 * @param a first input string
 	 * @param b second input string
@@ -17,8 +18,9 @@ public interface Metric {
     public abstract double computeDistance(String a, String b) throws IllegalArgumentException;
    
     /**
+     * Computes the normalized similarity between the input strings.
      * 
-     * @param a first input string
+     * @param a first input string.
      * @param b second input string
      * @return the similarity between the input strings (1 - normalized_distance)
      * @throws IllegalArgumentException

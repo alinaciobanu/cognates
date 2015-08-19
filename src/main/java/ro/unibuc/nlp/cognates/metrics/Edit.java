@@ -15,28 +15,9 @@ public class Edit implements Metric {
 	public Edit() {
 		distanceMap = new HashMap<String, Double>();
 	}
-	
-	public double computeDistance(String a, String b) throws IllegalArgumentException {
-		
-		double distance = computeEdit(a, b);
-		int maxLength = Math.max(a.length(), b.length());
-		
-		if (maxLength == 0) {
-			return 0;
-		}
-					
-		return distance/maxLength;
-	}
-
-	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
-		
-		double distance = computeDistance(a, b);
-		
-		return 1 - distance;
-	}
 
 	/**
-	 * Computes the unnormalized edit distance between the input strings
+	 * Computes the unnormalized edit distance between the input strings.
 	 * 
 	 * @param a the first string
 	 * @param b the second string
@@ -74,5 +55,24 @@ public class Edit implements Metric {
 			 
 			 return distance;
 		 }
+	}
+	
+	public double computeDistance(String a, String b) throws IllegalArgumentException {
+		
+		double distance = computeEdit(a, b);
+		int maxLength = Math.max(a.length(), b.length());
+		
+		if (maxLength == 0) {
+			return 0;
+		}
+					
+		return distance/maxLength;
+	}
+
+	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
+		
+		double distance = computeDistance(a, b);
+		
+		return 1 - distance;
 	}
 }

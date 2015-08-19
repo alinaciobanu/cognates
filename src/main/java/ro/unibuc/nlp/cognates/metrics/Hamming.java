@@ -6,28 +6,9 @@ package ro.unibuc.nlp.cognates.metrics;
  * @author alina
  */
 public class Hamming implements Metric {
-
-	public double computeDistance(String a, String b) throws IllegalArgumentException {
-
-		double distance = computeHamming(a, b);
-		int maxLength = Math.max(a.length(), b.length());
-		
-		if (maxLength == 0) {
-			return 0;
-		}
-					
-		return distance/maxLength;
-	}
-
-	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
-
-		double distance = computeDistance(a, b);
-		
-		return 1 - distance;
-	}
 	
 	/**
-	 * Computes the unnormalized Hamming distance between the input strings
+	 * Computes the unnormalized Hamming distance between the input strings.
 	 * 
 	 * @param a the first string
 	 * @param b the second string
@@ -50,5 +31,24 @@ public class Hamming implements Metric {
 		}
 		
 		return diff;
+	}
+
+	public double computeDistance(String a, String b) throws IllegalArgumentException {
+
+		double distance = computeHamming(a, b);
+		int maxLength = Math.max(a.length(), b.length());
+		
+		if (maxLength == 0) {
+			return 0;
+		}
+					
+		return distance/maxLength;
+	}
+
+	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
+
+		double distance = computeDistance(a, b);
+		
+		return 1 - distance;
 	}
 }

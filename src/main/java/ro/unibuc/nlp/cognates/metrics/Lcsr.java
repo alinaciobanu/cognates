@@ -8,7 +8,8 @@ package ro.unibuc.nlp.cognates.metrics;
 public class Lcsr implements Metric {
 
 	/**
-	 * Computes the longest common subsequence between the input strings
+	 * Computes the longest common subsequence between the input strings.
+	 * 
 	 * @param a first input string
 	 * @param b second input string
 	 * @return the longest common subsequence between the input strings

@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 /**
  * Utility methods for computing distance or similarity metrics.
  * 
@@ -43,6 +45,7 @@ public class MetricUtils {
     
     /**
      * Extracts a set of unique n-grams from the input string.
+     * 
      * @param string the input string
      * @param size the size of the n-grams
      * @return a set of unique n-grams
@@ -54,6 +57,7 @@ public class MetricUtils {
     
 	/**
 	 * Extracts a list of n-grams from the input string.
+	 * 
 	 * @param string the input string
 	 * @param size the size of the n-grams
 	 * @return a list of n-grams
@@ -71,6 +75,7 @@ public class MetricUtils {
 	
 	/**
 	 * Extracts an n-gram from the input string.
+	 * 
 	 * @param string the input string
 	 * @param start the index where the n-gram begins
 	 * @param size the size of the n-gram
@@ -91,7 +96,8 @@ public class MetricUtils {
 	}
     
     /**
-     * Formats the input value with the provided format
+     * Formats the input value with the provided format.
+     * 
      * @param value the double value to be formatted
      * @param before the number of digits before the floating point
      * @param after the number of digits after the floating point
@@ -112,6 +118,7 @@ public class MetricUtils {
     
     /**
      * Returns a sequence of hashtags.
+     * 
      * @param size the size of the sequence
      * @return a sequence of hashtags
      */
