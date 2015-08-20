@@ -56,7 +56,7 @@ public class Jaccard implements Metric {
 	 */
 	public double computeDistance(String a, String b, int n) throws IllegalArgumentException {
 		
-		double similarity = computeSimilarity(a, b);
+		double similarity = computeSimilarity(a, b, n);
 		
 		return 1 - similarity;
 	}	
