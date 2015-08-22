@@ -12,7 +12,7 @@ public class MetricUtilsTest {
 			
 		// test validation on the first argument
 		try {
-			MetricUtils.getInstance().validate(null, "test");
+			MetricUtils.validate(null, "test");
 			Assert.fail("Expecting an exception for illegal arguments.");
 		}
 		catch (Exception e) {
@@ -21,7 +21,7 @@ public class MetricUtilsTest {
 		
 		// test validation on the second argument
 		try {
-			MetricUtils.getInstance().validate("test", null);
+			MetricUtils.validate("test", null);
 			Assert.fail("Expecting an exception for illegal arguments.");
 		}
 		catch (Exception e) {
@@ -33,19 +33,19 @@ public class MetricUtilsTest {
 	public void testNgrams() {
 		
 		// 2-grams
-		List<String> ngrams = MetricUtils.getInstance().getNgrams("lingua", 2);
+		List<String> ngrams = MetricUtils.getNgrams("lingua", 2);
 		String[] actual = ngrams.toArray(new String[ngrams.size()]) ;
 		String[] expected = new String[]{"li", "in", "ng", "gu", "ua"};
 		Assert.assertArrayEquals(actual, expected);
 		
 		// 3-grams
-		ngrams = MetricUtils.getInstance().getNgrams("lingua", 3);
+		ngrams = MetricUtils.getNgrams("lingua", 3);
 		actual = ngrams.toArray(new String[ngrams.size()]) ;
 		expected = new String[]{"lin", "ing", "ngu", "gua"};
 		Assert.assertArrayEquals(actual, expected);	
 		
 		// 7-grams
-		ngrams = MetricUtils.getInstance().getNgrams("lingua", 7);
+		ngrams = MetricUtils.getNgrams("lingua", 7);
 		actual = ngrams.toArray(new String[ngrams.size()]) ;
 		// there are no 7-grams in a word of length 6
 		expected = new String[]{};

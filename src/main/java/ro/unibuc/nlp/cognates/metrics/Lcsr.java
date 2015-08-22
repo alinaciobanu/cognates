@@ -17,7 +17,7 @@ public class Lcsr implements Metric {
 	 */
 	public double computeLcs(String a, String b) throws IllegalArgumentException {
 
-		MetricUtils.getInstance().validate(a, b);
+		MetricUtils.validate(a, b);
 		
 		int[][]lcsr = new int[a.length() + 1][b.length() + 1];
 		

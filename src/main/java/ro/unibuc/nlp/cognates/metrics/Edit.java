@@ -26,7 +26,7 @@ public class Edit implements Metric {
 	 */
 	public double computeEdit(String a, String b) throws IllegalArgumentException {
 		
-		MetricUtils.getInstance().validate(a, b);
+		MetricUtils.validate(a, b);
 		
 		int cost = 0;
 

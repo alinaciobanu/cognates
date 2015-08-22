@@ -17,7 +17,7 @@ public class Hamming implements Metric {
 	 */
 	public double computeHamming(String a, String b) throws IllegalArgumentException {
 		
-		MetricUtils.getInstance().validate(a, b);
+		MetricUtils.validate(a, b);
 		
 		if (a.length() != b.length()) {
 			throw new IllegalArgumentException("Input strings cannot have different sizes.");

@@ -21,10 +21,10 @@ public class Jaccard implements Metric {
 	 */
 	public double computeSimilarity(String a, String b, int n) throws IllegalArgumentException {
 	
-		MetricUtils.getInstance().validate(a, b);
+		MetricUtils.validate(a, b);
 		
-		Set<String> aNgrams = MetricUtils.getInstance().getUniqueNgrams(a, n);
-		Set<String> bNgrams = MetricUtils.getInstance().getUniqueNgrams(b, n);
+		Set<String> aNgrams = MetricUtils.getUniqueNgrams(a, n);
+		Set<String> bNgrams = MetricUtils.getUniqueNgrams(b, n);
 		Set<String> allNgrams = new HashSet<String>();
 
 		allNgrams.addAll(aNgrams);

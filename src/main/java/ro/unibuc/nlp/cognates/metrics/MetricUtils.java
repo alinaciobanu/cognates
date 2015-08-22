@@ -6,28 +6,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-
 /**
  * Utility methods for computing distance or similarity metrics.
  * 
  * @author alina
  */
 public class MetricUtils {
-	
-	private MetricUtils() {
-		
-	}
-	
-	private static MetricUtils instance;
-	
-	public static MetricUtils getInstance() {
-		
-		if (instance == null)
-			instance = new MetricUtils();
-		
-		return instance;
-	}
 	
     /**
      * Validates that the input strings are not null.
@@ -36,7 +20,7 @@ public class MetricUtils {
      * @param b second input string
      * @throws IllegalArgumentException
      */
-    public void validate(String a, String b)  throws IllegalArgumentException {
+    public static void validate(String a, String b)  throws IllegalArgumentException {
     	
     	if (a == null || b == null) {
     		throw new IllegalArgumentException("Input strings cannot be null.");
@@ -50,7 +34,7 @@ public class MetricUtils {
      * @param size the size of the n-grams
      * @return a set of unique n-grams
      */
-    public Set<String> getUniqueNgrams(String string, int size) {
+    public static Set<String> getUniqueNgrams(String string, int size) {
     	
     	return new HashSet<String>(getNgrams(string, size));
     }
@@ -62,7 +46,7 @@ public class MetricUtils {
 	 * @param size the size of the n-grams
 	 * @return a list of n-grams
 	 */
-	public List<String> getNgrams(String string, int size) {
+	public static List<String> getNgrams(String string, int size) {
 		
 		List<String> ngrams = new LinkedList<String>();
 		
@@ -81,7 +65,7 @@ public class MetricUtils {
 	 * @param size the size of the n-gram
 	 * @return an n-gram (or an empty string, if the parameters are invalid)
 	 */
-    public String getNgram(String string, int start, int size) {
+    public static String getNgram(String string, int start, int size) {
 		
 		String ngram = "";
 		
@@ -104,7 +88,7 @@ public class MetricUtils {
      * @return the formatted value as a string
      * @throws IllegalArgumentException
      */
-    public String format(double value, int before, int after) throws IllegalArgumentException {
+    public static String format(double value, int before, int after) throws IllegalArgumentException {
     	
     	if (before <= 0 || after <= 0)
     		throw new IllegalArgumentException(
@@ -122,7 +106,7 @@ public class MetricUtils {
      * @param size the size of the sequence
      * @return a sequence of hashtags
      */
-    private String getHastagSequence (int size) {
+    private static String getHastagSequence (int size) {
     	
     	String sequence = "";
     	for (int i = 0; i < size; i++) {
