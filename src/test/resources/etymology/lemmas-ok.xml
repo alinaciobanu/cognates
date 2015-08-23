@@ -1,0 +1,47 @@
+<lemmas>
+    <lemma>
+        <value>aranjament</value>
+        <origin language="french">arrangement</origin>
+    </lemma>
+    <lemma>
+        <value>aur</value>
+        <origin language="latin">aurum</origin>
+    </lemma>
+    <lemma>
+        <value>balet</value>
+        <origin language="french">balet</origin>
+        <origin language="italian">baletto</origin>
+    </lemma>
+    <lemma>
+        <value>bușel</value>
+        <origin language="english">bushel</origin>
+    </lemma>
+    <lemma>
+        <value>cometă</value>
+        <origin language="french">comète</origin>
+        <origin language="latin">cometa</origin>
+    </lemma>
+    <lemma>
+        <value>macetă</value>
+        <origin language="spanish">machete</origin>
+    </lemma>
+    <lemma>
+        <value>șunt</value>
+        <origin language="english">shunt</origin>
+        <origin language="french">shunt</origin>
+    </lemma>
+    <lemma>
+        <value>tambuchi</value>
+        <origin language="italian">stambugio</origin>
+        <origin language="spanish">tambucho</origin>
+    </lemma>
+    <lemma>
+        <value>tutun</value>
+        <origin language="turkish">tütün</origin>
+    </lemma>
+    <lemma>
+        <value>variație</value>
+        <origin language="french">variation</origin>
+        <origin language="latin">variatio</origin>
+    </lemma>
+</lemmas>
