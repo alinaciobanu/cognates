@@ -1,12 +1,12 @@
 package ro.unibuc.nlp.cognates.etymology;
 
-import java.rmi.UnmarshalException;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.MarshalException;
+import javax.xml.bind.UnmarshalException;
 
 import ro.unibuc.nlp.cognates.etymology.model.Lemma;
 import ro.unibuc.nlp.cognates.etymology.model.Lemmas;
