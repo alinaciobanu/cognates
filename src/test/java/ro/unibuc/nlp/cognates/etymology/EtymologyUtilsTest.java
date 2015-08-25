@@ -1,6 +1,5 @@
 package ro.unibuc.nlp.cognates.etymology;
 
-import java.rmi.UnmarshalException;
 import java.util.Arrays;
 
 import javax.xml.bind.JAXBException;
@@ -34,7 +33,7 @@ public class EtymologyUtilsTest {
 			Assert.assertNotNull(filtered.getLemma());
 			Assert.assertEquals(6, filtered.getLemma().size());
 		} 
-		catch (JAXBException | UnmarshalException | IllegalArgumentException e) {
+		catch (JAXBException | IllegalArgumentException e) {
 			Assert.fail("Unexpected error while loading model.");
 		}
 	}
@@ -58,7 +57,7 @@ public class EtymologyUtilsTest {
 			Assert.assertNotNull(filtered.getLemma());
 			Assert.assertEquals(6, filtered.getLemma().size());
 		} 
-		catch (JAXBException | UnmarshalException | IllegalArgumentException e) {
+		catch (JAXBException | IllegalArgumentException e) {
 			Assert.fail("Unexpected error while loading model.");
 		}
 	}
