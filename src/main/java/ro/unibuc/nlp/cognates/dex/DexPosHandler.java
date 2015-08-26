@@ -19,10 +19,10 @@ public class DexPosHandler {
 	private Connection conn;
 		
 	public DexPosHandler(String url, String user, String password) 
-			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 		
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = DriverManager.getConnection(url, user, password);
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		conn = DriverManager.getConnection(url, user, password);
 	}
 	
 	public Connection getConn() {
@@ -78,7 +78,8 @@ public class DexPosHandler {
 	 * poartă: [poartă(substantiv), purta(verb)]
 	 * 
 	 * @param inPath: input file in which words are written each on a line
-	 * @param outPath: output file in which words are written together with all their possible lemmas and parts of speech
+	 * @param outPath: output file in which words are written together with 
+	 * all their possible lemmas and parts of speech
 	 * @throws IOException
 	 * @throws SqlException
 	 */
@@ -118,10 +119,11 @@ public class DexPosHandler {
 		
 		Statement statement = getConn().createStatement();
 		ResultSet resultSet = statement.executeQuery(
-				"SELECT DISTINCT(LOWER(TRIM(l.formNoAccent))), " +
-				"LOWER(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(inf.description, ' ', 1), ',', 1))) " +
-				"FROM dex.inflectedform inff, dex.lexem l, dex.inflection inf " +
-				"WHERE inff.lexemId = l.id AND inff.inflectionId = inf.id AND inff.formNoAccent = \'" + word + "\';");
+			"SELECT DISTINCT(LOWER(TRIM(l.formNoAccent))), " +
+			"LOWER(TRIM(SUBSTRING_INDEX(SUBSTRING_INDEX(inf.description, ' ', 1), ',', 1))) " +
+			"FROM dex.inflectedform inff, dex.lexem l, dex.inflection inf " +
+			"WHERE inff.lexemId = l.id AND inff.inflectionId = inf.id AND inff.formNoAccent = \'" + 
+			word + "\';");
 			
 		while (resultSet.next()) {
 			String lemma = resultSet.getObject(1).toString();
