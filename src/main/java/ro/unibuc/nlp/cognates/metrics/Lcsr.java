@@ -1,5 +1,7 @@
 package ro.unibuc.nlp.cognates.metrics;
 
+import org.apache.log4j.Logger;
+
 /**
  * Computes the longest common subsequence distance or similarity between two input strings
  * 
@@ -7,6 +9,8 @@ package ro.unibuc.nlp.cognates.metrics;
  */
 public class Lcsr implements Metric {
 
+	private static final Logger logger = Logger.getLogger(Lcsr.class);
+	
 	/**
 	 * Computes the longest common subsequence between the input strings.
 	 * 
@@ -43,22 +47,48 @@ public class Lcsr implements Metric {
 		return (double)lcsr[a.length()][b.length()];
 	}
 	
+	/**
+	 * Computes the longest common subsequence ratio distance between the input strings.
+	 * 
+	 * @param a first input string
+	 * @param b second input string
+	 * @return the longest common subsequence ratio distance between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeDistance(String a, String b) throws IllegalArgumentException {
+
+		logger.info("Computing the LCSR distance between strings " + a + " " + b);
 		
-		double similarity = computeSimilarity(a, b);
+		double similarity = computeLcs(a, b);
+		int maxLength = Math.max(a.length(), b.length());
+
+		if (maxLength == 0) {
+			return 0;
+		}
 		
-		return 1 - similarity;
+		return 1 - similarity/maxLength;
 	}
 
+	
+	/**
+	 * Computes the longest common subsequence ratio similarity between the input strings.
+	 * 
+	 * @param a first input string
+	 * @param b second input string
+	 * @return the longest common subsequence ratio similarity between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
 
-		double distance = computeLcs(a, b);
+		logger.info("Computing the LCSR similarity between strings " + a + " " + b);
+		
+		double similarity = computeLcs(a, b);
 		int maxLength = Math.max(a.length(), b.length());
 
 		if (maxLength == 0) {
 			return 1;
 		}
 		
-		return distance/maxLength;
+		return similarity/maxLength;
 	}
 }

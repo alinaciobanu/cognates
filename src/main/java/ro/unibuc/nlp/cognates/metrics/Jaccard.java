@@ -3,13 +3,17 @@ package ro.unibuc.nlp.cognates.metrics;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 /**
  * Computes the Jaccard distance or similarity between two input strings
  * 
  * @author alina
  */
 public class Jaccard implements Metric {
-	
+
+	private static final Logger logger = Logger.getLogger(Jaccard.class);
+
 	/**
 	 * Computes the Jaccard similarity between the input strings, using n-grams of the given size.
 	 * 
@@ -19,7 +23,7 @@ public class Jaccard implements Metric {
 	 * @return the Jaccard similarity between the input strings
 	 * @throws IllegalArgumentException
 	 */
-	public double computeSimilarity(String a, String b, int n) throws IllegalArgumentException {
+	private double computeJaccard(String a, String b, int n) throws IllegalArgumentException {
 	
 		MetricUtils.validate(a, b);
 		
@@ -46,6 +50,29 @@ public class Jaccard implements Metric {
 	}
 	
 	/**
+	 * Computes the Jaccard similarity between the input strings, using n-grams of the given size.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @param n the n-gram size
+	 * @return the Jaccard similarity between the input strings
+	 * @throws IllegalArgumentException
+	 */
+	public double computeSimilarity(String a, String b, int n) throws IllegalArgumentException {
+
+		logger.info("Computing the Jaccard similarity between strings " + a + " " + b + " using " + n + "-grams");
+		
+		return computeJaccard(a, b, n);
+	}
+
+	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
+
+		logger.info("Computing the Jaccard similarity between strings " + a + " " + b + " using 2-grams");
+		
+		return computeJaccard(a, b, 2);
+	}
+	
+	/**
 	 * Computes the Jaccard distance between the input strings, using n-grams of the given size.
 	 * 
 	 * @param a the first string
@@ -55,21 +82,26 @@ public class Jaccard implements Metric {
 	 * @throws IllegalArgumentException
 	 */
 	public double computeDistance(String a, String b, int n) throws IllegalArgumentException {
+
+		logger.info("Computing the Jaccard distance between strings " + a + " " + b + " using " + n + "-grams");
 		
-		double similarity = computeSimilarity(a, b, n);
-		
+		double similarity = computeJaccard(a, b, n);
 		return 1 - similarity;
 	}	
 
+	/**
+	 * Computes the Jaccard distance between the input strings using bi-grams.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the Jaccard distance between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeDistance(String a, String b) throws IllegalArgumentException {
-		
-		double similarity = computeSimilarity(a, b);
-		
-		return 1 - similarity;
-	}
 
-	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
+		logger.info("Computing the Jaccard distance between strings " + a + " " + b + " using 2-grams");
 		
-		return computeSimilarity(a, b, 2);
+		double similarity = computeJaccard(a, b, 2);
+		return 1 - similarity;
 	}
 }

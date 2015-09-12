@@ -3,6 +3,8 @@ package ro.unibuc.nlp.cognates.metrics;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 /**
  * Computes the Dice similarity or distance between the input strings.
  * 
@@ -10,6 +12,8 @@ import java.util.Set;
  */
 public class Dice implements Metric {
 
+	private static final Logger logger = Logger.getLogger(Dice.class);
+	
 	/**
 	 * Computes the Dice similarity between the input strings, using n-grams of the given size.
 	 * 
@@ -19,7 +23,7 @@ public class Dice implements Metric {
 	 * @return the Dice similarity between the input strings
 	 * @throws IllegalArgumentException
 	 */
-	public double computeSimilarity(String a, String b, int n) throws IllegalArgumentException {
+	private double computeDice(String a, String b, int n) throws IllegalArgumentException {
 		
 		MetricUtils.validate(a, b);
 		
@@ -46,6 +50,22 @@ public class Dice implements Metric {
 	}
 	
 	/**
+	 * Computes the Dice similarity between the input strings, using n-grams of the given size.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @param n the n-gram size
+	 * @return the Dice similarity between the input strings
+	 * @throws IllegalArgumentException
+	 */
+	public double computeSimilarity(String a, String b, int n) throws IllegalArgumentException {
+		
+		logger.info("Computing the Dice similiarity between strings " + a + " " + b + " using " + n + "-grams");
+		
+		return computeDice(a, b, n);
+	}
+	
+	/**
 	 * Computes the Dice distance between the input strings, using n-grams of the given size.
 	 * 
 	 * @param a the first string
@@ -55,21 +75,41 @@ public class Dice implements Metric {
 	 * @throws IllegalArgumentException
 	 */
 	public double computeDistance(String a, String b, int n) throws IllegalArgumentException {
+
+		logger.info("Computing the Dice distance between strings " + a + " " + b + " using " + n + "-grams");
 		
-		double similarity = computeSimilarity(a, b, n);
-		
+		double similarity = computeDice(a, b, n);
 		return 1 - similarity;
 	}
 
+	/**
+	 * Computes the Dice distance between the input strings using bi-grams.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the Dice distance between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeDistance(String a, String b) throws IllegalArgumentException {
 		
-		double similarity = computeSimilarity(a, b);
+		logger.info("Computing the Dice distance between strings " + a + " " + b + " using 2-grams");
 		
+		double similarity = computeDice(a, b, 2);
 		return 1 - similarity;
 	}
 
+	/**
+	 * Computes the Dice similarity between the input strings using bi-grams.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the Dice similarity between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
 		
-		return computeSimilarity(a, b, 2);
+		logger.info("Computing the Dice similiarity between strings " + a + " " + b + " using 2-grams");
+		
+		return computeDice(a, b, 2);
 	}
 }

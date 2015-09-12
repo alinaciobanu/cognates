@@ -14,6 +14,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 /**
  * Handles I/O operations.
  * 
@@ -21,6 +23,8 @@ import java.util.List;
  */
 public class FileUtils {
 
+	private static final Logger logger = Logger.getLogger(FileUtils.class);
+	
 	/**
 	 * Reads the content of a file using the UTF8 encoding.
 	 * 
@@ -40,16 +44,16 @@ public class FileUtils {
      * @return a list containing the lines of the given file
      */
     public static List<String> readLines(String path, Charset encoding) throws IOException {
-        
-    	List<String> lines = new LinkedList<String>();
 
+        logger.info("Retrieving the content of file " + path + " using encoding " + encoding.toString());
+       
         BufferedReader in = getReader(path, encoding);
-
+    	
+        List<String> lines = new LinkedList<String>();
         if (in == null)
             return lines;
-
+        
         String line;
-
         while ((line = in.readLine()) != null) {
             lines.add(line);
         }
@@ -76,6 +80,8 @@ public class FileUtils {
      * @param encoding the character set used for writing the file
      */
     public static void writeLines(String path, List<String> lines, Charset encoding) throws IOException {
+        
+        logger.info("Writing the content of file " + path + " using encoding " + encoding.toString()); 
         
     	BufferedWriter out = getWriter(path, encoding);
 

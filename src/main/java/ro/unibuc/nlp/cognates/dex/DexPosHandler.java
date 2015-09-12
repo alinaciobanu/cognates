@@ -12,9 +12,13 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.apache.log4j.Logger;
+
 import ro.unibuc.nlp.cognates.utils.FileUtils;
 
 public class DexPosHandler {
+	
+	private static final Logger logger = Logger.getLogger(DexPosHandler.class);
 	
 	private Connection conn;
 		
@@ -36,13 +40,15 @@ public class DexPosHandler {
 	}
 	
 	/**
-	 * Extracts all the inflected forms provided by dexonline.
+	 * Extracts all the inflected forms provided by DexOnline.
 	 * 
 	 * @param outPath: output file in which the words are written
 	 * @throws SQLException
 	 * @throws IOException
 	 */
 	public void writeAllInflectedForms(String outPath) throws SQLException, IOException {
+		
+		logger.info("Writing all the inflected forms provided by DexOnline.");
 		
 		String query = "SELECT DISTINCT(LOWER(TRIM(formNoAccent))) FROM dex.inflectedform";
 		
@@ -114,6 +120,8 @@ public class DexPosHandler {
 	 * @throws SQLException
 	 */
 	public Set<String> getLemmasAndPos(String word) throws SQLException {
+		
+		logger.info("Retrieving lemmas and parts of speech for word " + word);
 		
 		Set<String> posSet = new TreeSet<String>();
 		

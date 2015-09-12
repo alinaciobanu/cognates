@@ -6,12 +6,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 /**
  * Utility methods for computing distance or similarity metrics.
  * 
  * @author alina
  */
 public class MetricUtils {
+
+	private static final Logger logger = Logger.getLogger(MetricUtils.class);
 	
     /**
      * Validates that the input strings are not null.
@@ -20,7 +25,9 @@ public class MetricUtils {
      * @param b second input string
      * @throws IllegalArgumentException
      */
-    public static void validate(String a, String b)  throws IllegalArgumentException {
+    public static void validate(String a, String b)  throws IllegalArgumentException {    	
+
+    	logger.info("Validating input strings: [" + a + ", " + b + "]");
     	
     	if (a == null || b == null) {
     		throw new IllegalArgumentException("Input strings cannot be null.");
@@ -47,6 +54,8 @@ public class MetricUtils {
 	 * @return a list of n-grams
 	 */
 	public static List<String> getNgrams(String string, int size) {
+    	
+    	logger.info("Extracting " + size + "-grams from string" + string);
 		
 		List<String> ngrams = new LinkedList<String>();
 		
@@ -90,9 +99,11 @@ public class MetricUtils {
      */
     public static String format(double value, int before, int after) throws IllegalArgumentException {
     	
-    	if (before <= 0 || after <= 0)
-    		throw new IllegalArgumentException(
-    				"The number of ditigs before or after the floating point must be positive.");
+    	if (before <= 0 || after <= 0) {
+    		String message = "The number of ditigs before or after the floating point must be positive";
+    		logger.error(message);
+    		throw new IllegalArgumentException(message);
+    	}
     	
     	String format = getHastagSequence(before) + "." + getHastagSequence(after);
     	DecimalFormat formatter = new DecimalFormat(format);
@@ -114,5 +125,9 @@ public class MetricUtils {
     	}
     	
     	return sequence;
+    }
+    
+    public static void main(String[] args) {
+    	validate("123", "456");
     }
 }

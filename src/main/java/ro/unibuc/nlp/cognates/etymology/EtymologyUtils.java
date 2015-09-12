@@ -8,6 +8,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.MarshalException;
 import javax.xml.bind.UnmarshalException;
 
+import org.apache.log4j.Logger;
+
 import ro.unibuc.nlp.cognates.etymology.model.Lemma;
 import ro.unibuc.nlp.cognates.etymology.model.Lemmas;
 import ro.unibuc.nlp.cognates.etymology.model.ModelHandler;
@@ -23,6 +25,8 @@ import com.google.common.collect.Multimap;
  * @author alina
  */
 public class EtymologyUtils {
+
+	private static final Logger logger = Logger.getLogger(EtymologyUtils.class);
 	
 	private static String SEPARATOR = "____";
 	
@@ -34,6 +38,8 @@ public class EtymologyUtils {
 	 * @return a subset of the initial dataset
 	 */
 	public static Lemmas getLemmasWithEtymology(Lemmas lemmas, List<String> languages) {
+		
+		logger.info("Retrieving lemmas with etymologies in one of the following languages: " + languages);
 		
 		Lemmas filtered = new Lemmas();
 		
@@ -112,6 +118,8 @@ public class EtymologyUtils {
 	 * @return a subset of the initial dataset
 	 */
 	public static Lemmas getLemmasWithoutEtymology(Lemmas lemmas, List<String> languages) {
+
+		logger.info("Retrieving lemmas not having etymologies in any of the following languages: " + languages);
 		
 		Lemmas filtered = new Lemmas();
 		

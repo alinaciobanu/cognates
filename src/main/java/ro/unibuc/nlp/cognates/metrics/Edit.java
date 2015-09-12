@@ -3,6 +3,8 @@ package ro.unibuc.nlp.cognates.metrics;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 /**
  * Computes the edit distance or similarity between two input strings.
  * 
@@ -10,6 +12,8 @@ import java.util.Map;
  */
 public class Edit implements Metric {
 
+	private static final Logger logger = Logger.getLogger(Edit.class);
+	
 	private Map<String, Double> distanceMap;
 	
 	public Edit() {
@@ -57,7 +61,17 @@ public class Edit implements Metric {
 		 }
 	}
 	
+	/**
+	 * Computes the normalized edit distance between the input strings.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the normalized edit distance between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeDistance(String a, String b) throws IllegalArgumentException {
+
+		logger.info("Computing the edit distance between strings " + a + " " + b);
 		
 		double distance = computeEdit(a, b);
 		int maxLength = Math.max(a.length(), b.length());
@@ -68,11 +82,25 @@ public class Edit implements Metric {
 					
 		return distance/maxLength;
 	}
-
+	/**
+	 * Computes the normalized edit similarity between the input strings.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the normalized edit similarity between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
+
+		logger.info("Computing the edit similarity between strings " + a + " " + b);
 		
-		double distance = computeDistance(a, b);
+		double distance = computeEdit(a, b);
+		int maxLength = Math.max(a.length(), b.length());
 		
-		return 1 - distance;
+		if (maxLength == 0) {
+			return 1;
+		}
+		
+		return 1 - distance/maxLength;
 	}
 }

@@ -7,6 +7,9 @@
 # executable files
 *.exe
 
+# log folder
+/log
+
 # package files
 *.jar
 

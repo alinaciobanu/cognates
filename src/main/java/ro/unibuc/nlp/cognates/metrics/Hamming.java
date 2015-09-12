@@ -1,11 +1,15 @@
 package ro.unibuc.nlp.cognates.metrics;
 
+import org.apache.log4j.Logger;
+
 /**
  * Computes the Hamming distance or similarity between two input strings.
  * 
  * @author alina
  */
 public class Hamming implements Metric {
+
+	private static final Logger logger = Logger.getLogger(Hamming.class);
 	
 	/**
 	 * Computes the unnormalized Hamming distance between the input strings.
@@ -32,9 +36,19 @@ public class Hamming implements Metric {
 		
 		return diff;
 	}
-
+	
+	/**
+	 * Computes the normalized Hamming distance between the input strings.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the normalized Hamming distance between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeDistance(String a, String b) throws IllegalArgumentException {
 
+		logger.info("Computing the Hamming distance between strings " + a + " " + b);
+		
 		double distance = computeHamming(a, b);
 		int maxLength = Math.max(a.length(), b.length());
 		
@@ -44,11 +58,26 @@ public class Hamming implements Metric {
 					
 		return distance/maxLength;
 	}
-
+	
+	/**
+	 * Computes the normalized Hamming similarity between the input strings.
+	 * 
+	 * @param a the first string
+	 * @param b the second string
+	 * @return the normalized Hamming similarity between the input strings
+	 * @throws IllegalArgumentException
+	 */
 	public double computeSimilarity(String a, String b) throws IllegalArgumentException {
 
-		double distance = computeDistance(a, b);
+		logger.info("Computing the Hamming similarity between strings " + a + " " + b);
 		
-		return 1 - distance;
+		double distance = computeHamming(a, b);
+		int maxLength = Math.max(a.length(), b.length());
+		
+		if (maxLength == 0) {
+			return 1;
+		}
+		
+		return 1 - distance/maxLength;
 	}
 }
