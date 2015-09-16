@@ -55,9 +55,9 @@ public class CognateMatcherTest {
 		Assert.assertEquals("abonament	abbonamento", lines.get(0).trim());
 		Assert.assertEquals("abonament: [abonnement(french)]", lines.get(1).trim());
 		Assert.assertEquals("abbonamento: [abonnement(french)]", lines.get(2).trim());
-		Assert.assertEquals("administrator	amministratore", lines.get(0).trim());
-		Assert.assertEquals("abonament: [administrateur(french) administrator(latin)]", lines.get(1).trim());
-		Assert.assertEquals("amministratore: [administratore(latin)]", lines.get(2).trim());
+		Assert.assertEquals("administrator	amministratore", lines.get(3).trim());
+		Assert.assertEquals("administrator: [administrateur(french) administrator(latin)]", lines.get(4).trim());
+		Assert.assertEquals("amministratore: [administratore(latin)]", lines.get(5).trim());
 		
 		// clean up
 		Path path = FileSystems.getDefault().getPath(fileName);
