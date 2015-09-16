@@ -1,4 +1,4 @@
-package ro.unibuc.nlp.cognates.etymology;
+package ro.unibuc.nlp.cognates.etymology.model;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -231,5 +231,46 @@ public class ModelHandlerTest {
 		catch (Exception e) {
 			Assert.assertTrue(e instanceof JAXBException);
 		}
+	}
+	
+	@Test
+	public void testConversionToString() {
+		
+		Assert.assertEquals("", ModelHandler.toString(null));
+		
+		Lemma lemma = new Lemma();
+		lemma.setValue("lemma1");
+
+		String actual = ModelHandler.toString(lemma);
+		String expected = "lemma1";
+		Assert.assertEquals(expected, actual);
+		
+		Origin origin = new Origin();
+		origin.setLanguage("language1");
+		origin.setValue("value1");
+		
+		lemma.getOrigin().add(origin);
+
+		actual = ModelHandler.toString(lemma);
+		expected = "lemma1: [value1(language1)]";
+		Assert.assertEquals(expected, actual);
+		
+		origin = new Origin();
+		origin.setLanguage("language2");
+		origin.setValue("value2");
+		
+		lemma = new Lemma();
+		lemma.setValue("lemma2");
+		lemma.getOrigin().add(origin);
+		
+		origin = new Origin();
+		origin.setLanguage("language3");
+		origin.setValue("value3");
+		
+		lemma.getOrigin().add(origin);
+
+		actual = ModelHandler.toString(lemma);
+		expected = "lemma2: [value2(language2) value3(language3)]";
+		Assert.assertEquals(expected, actual);
 	}
 }

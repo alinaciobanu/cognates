@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.MarshalException;
-import javax.xml.bind.UnmarshalException;
 
 import org.apache.log4j.Logger;
 
@@ -69,10 +67,10 @@ public class EtymologyUtils {
 	 * @param in the file path from where to load the input dataset
 	 * @param languages the list of languages to filter by
 	 * @return a subset of the initial dataset
-	 * @throws JAXBException
+	 * @throws JAXBException, IllegalArgumentException
 	 */
 	public static Lemmas getLemmasWithEtymology(String in, List<String> languages) 
-			throws JAXBException, UnmarshalException, IllegalArgumentException {
+			throws JAXBException, IllegalArgumentException {
 		
 		Lemmas lemmas = ModelHandler.readModel(in);
 		return getLemmasWithEtymology(lemmas, languages);
@@ -85,10 +83,10 @@ public class EtymologyUtils {
 	 * @param lemmas the input dataset
 	 * @param out the file path where the output subset should be persisted
 	 * @param languages the list of languages to filter by
-	 * @throws JAXBException
+	 * @throws JAXBException, IllegalArgumentException
 	 */
 	public static void writeLemmasWithEtymology(Lemmas lemmas, String out, List<String> languages) 
-			throws JAXBException, MarshalException, IllegalArgumentException {
+			throws JAXBException, IllegalArgumentException {
 		
 		Lemmas filtered = getLemmasWithEtymology(lemmas, languages);
 		ModelHandler.writeModel(filtered, out);
@@ -100,10 +98,10 @@ public class EtymologyUtils {
 	 * @param in the file path from where to load the input dataset
 	 * @param out the file path where the output subset should be persisted
 	 * @param languages the list of languages to filter by
-	 * @throws JAXBException
+	 * @throws JAXBException, IllegalArgumentException
 	 */
 	public static void writeLemmasWithEtymology(String in, String out, List<String> languages) 
-			throws JAXBException, MarshalException, UnmarshalException, IllegalArgumentException {
+			throws JAXBException, IllegalArgumentException {
 		
 		Lemmas lemmas = ModelHandler.readModel(in);
 		writeLemmasWithEtymology(lemmas, out, languages);
@@ -153,10 +151,10 @@ public class EtymologyUtils {
 	 * @param in the file path from where to load the input dataset
 	 * @param languages the list of languages to filter by
 	 * @return a subset of the initial dataset
-	 * @throws JAXBException
+	 * @throws JAXBException, IllegalArgumentException
 	 */
 	public static Lemmas getLemmasWithoutEtymology(String in, List<String> languages) 
-			throws JAXBException, UnmarshalException, IllegalArgumentException {
+			throws JAXBException, IllegalArgumentException {
 		
 		Lemmas lemmas = ModelHandler.readModel(in);
 		return getLemmasWithoutEtymology(lemmas, languages);
@@ -168,10 +166,10 @@ public class EtymologyUtils {
 	 * @param lemmas the input dataset
 	 * @param out the file path where the output subset should be persisted
 	 * @param languages list of languages to filter by
-	 * @throws JAXBException
+	 * @throws JAXBException, IllegalArgumentException
 	 */
 	public static void writeLemmasWithoutEtymology(Lemmas lemmas, String out, List<String> languages) 
-			throws JAXBException, MarshalException, IllegalArgumentException {
+			throws JAXBException, IllegalArgumentException {
 		
 		Lemmas filtered = getLemmasWithoutEtymology(lemmas, languages);
 		ModelHandler.writeModel(filtered, out);
@@ -183,10 +181,10 @@ public class EtymologyUtils {
 	 * @param in the file path from where to load the input dataset
 	 * @param out the file path where the output subset should be persisted
 	 * @param languages the list of languages to filter by
-	 * @throws JAXBException
+	 * @throws JAXBException, IllegalArgumentException
 	 */
 	public static void writeLemmasWithoutEtymology(String in, String out, List<String> languages) 
-			throws JAXBException, UnmarshalException, MarshalException, IllegalArgumentException {
+			throws JAXBException, IllegalArgumentException {
 		
 		Lemmas filtered = getLemmasWithoutEtymology(in, languages);
 		ModelHandler.writeModel(filtered, out);
@@ -248,5 +246,23 @@ public class EtymologyUtils {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Determines if a lemma has a given etymology
+	 * 
+	 * @param lemma input lemma
+	 * @param language the language to search
+	 * @return <code>true</code> if the input lemma has the given etymology, <code>false</code> otherwise
+	 */
+	public static boolean hasEtymology (Lemma lemma, String language) {
+		
+		for (Origin origin : lemma.getOrigin()) {
+			if (language.equals(origin.getLanguage())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

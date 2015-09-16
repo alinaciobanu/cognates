@@ -1,0 +1,6 @@
+# romanian	italian
+
+abonament	abbonamento
+acceptanță	accettazione
+administrator	amministratore
+balet		balletto

@@ -1,0 +1,20 @@
+<lemmas>
+    <lemma>
+        <value>abonament</value>
+        <origin language="french">abonnement</origin>
+    </lemma>
+    <lemma>
+        <value>acceptanță</value>
+        <origin language="english">acceptance</origin>
+    </lemma>
+    <lemma>
+        <value>administrator</value>
+        <origin language="french">administrateur</origin>
+        <origin language="latin">administrator</origin>
+    </lemma>
+    <lemma>
+        <value>balet</value>
+        <origin language="french">ballet</origin>
+        <origin language="italian">balletto</origin>
+    </lemma>
+</lemmas>
