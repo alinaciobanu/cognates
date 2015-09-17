@@ -42,7 +42,8 @@ public class CognateMatcher {
 	 * @param language1 the first language
 	 * @param language2 the second language
 	 */
-	public void match (String translationPath, String lemmasPath1, String lemmasPath2, String outPath, String language1, String language2) {
+	public void match (String translationPath, String lemmasPath1, String lemmasPath2, 
+			   String outPath, String language1, String language2) {
 		
 		match(translationPath, lemmasPath1, lemmasPath2, outPath, language1, language2, 0);
 	}
@@ -57,19 +58,21 @@ public class CognateMatcher {
 	 * @param outPath output path
 	 * @param language1 the first language
 	 * @param language2 the second language
-	 * @param relax the maximum number of characters at the end of each etymon to ignore during the etymology matching
+	 * @param relax the maximum number of characters at the end of each etymon to ignore during the 
+	 * etymology matching
 	 */
-	public void match (String translationPath, String lemmasPath1, String lemmasPath2, String outPath, String language1, String language2, int relax) {
+	public void match (String translationPath, String lemmasPath1, String lemmasPath2, 
+			   String outPath, String language1, String language2, int relax) {
 		
 		Lemmas lemmas1;
 		Lemmas lemmas2;
 		try {
 			lemmas1 = EtymologyUtils.getLemmasWithoutEtymology(
-												ModelHandler.readModel(lemmasPath1), 
-												Arrays.asList(language2));
+					ModelHandler.readModel(lemmasPath1), 
+					Arrays.asList(language2));
 			lemmas2 = EtymologyUtils.getLemmasWithoutEtymology(
-												ModelHandler.readModel(lemmasPath2), 
-												Arrays.asList(language1));
+					ModelHandler.readModel(lemmasPath2), 
+					Arrays.asList(language1));
 		}
 		catch (JAXBException | IllegalArgumentException e) {
 			logger.error("Error while loading datasets");
@@ -107,7 +110,8 @@ public class CognateMatcher {
 			
 			if (line.length() < 2) {
 				if (logger.isDebugEnabled()) 
-					logger.debug("Skippind line " + line + " that does not follow the expected format");
+					logger.debug("Skippind line " + line + 
+						     " that does not follow the expected format");
 				continue;
 			}
 		
@@ -135,7 +139,8 @@ public class CognateMatcher {
 				if (etymology1 == null || Strings.isNullOrEmpty(etymology1) ||
 					value1 == null || Strings.isNullOrEmpty(value1)) {
 					if (logger.isDebugEnabled())
-						logger.debug("Skipping invalid origin of lemma " + lemma1.getValue() + "in language " + language1);
+						logger.debug("Skipping invalid origin of lemma " + 
+						       lemma1.getValue() + "in language " + language1);
 					continue;
 				}
 				
@@ -148,13 +153,15 @@ public class CognateMatcher {
 					if (etymology2 == null || Strings.isNullOrEmpty(etymology2) ||
 						value2 == null || Strings.isNullOrEmpty(value2)) {
 						if (logger.isDebugEnabled())
-							logger.debug("Skipping invalid origin of lemma " + lemma2.getValue() + "in language " + language2);
+							logger.debug("Skipping invalid origin of lemma " + 
+							       lemma2.getValue() + "in language " + language2);
 						continue;
 					}
 					
 					if (etymology1.equals(etymology2)) {
 						try {
-							addCognate = StringUtils.areEqual(origin2.getValue(), value1, relax, true);
+							addCognate = StringUtils.areEqual(
+										 value2, value1, relax, true);
 							if (addCognate)
 								break;
 						}
@@ -186,7 +193,8 @@ public class CognateMatcher {
 	}
 	
 	/**
-	 * Builds a {@code Map} having the {@code String} values of the lemma as keys and the {@code Lemma} object as value. 
+	 * Builds a {@code Map} having the {@code String} values of the lemma as keys and the 
+	 * {@code Lemma} object as value. 
 	 * 
 	 * @param lemmas the input dataset
 	 * @return a map of lemmas
