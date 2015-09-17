@@ -12,16 +12,20 @@ public class StringUtils {
 	private static Logger logger = Logger.getLogger(StringUtils.class);
 	
 	/**
-	 * Verifies if the input strings are equal, given a certain relaxation for the suffix of the strings and the option to disregard diacritics.
+	 * Verifies if the input strings are equal, given a certain relaxation for the suffix of the strings 
+	 * and the option to disregard diacritics.
 	 * 
 	 * @param string1 the first input string
 	 * @param string2 the second input string
-	 * @param relax the maximum number of characters at the end of each input string to ignore during the comparison
+	 * @param relax the maximum number of characters at the end of each input string to ignore during the 
+	 * 	  comparison
 	 * @param removeDiacritics specifies whether diacritics should be ignored during the comparison
-	 * @return <code>true</code> if the input strings are equal (given the conditions passed as parameters), <code>false</code> otherwise
+	 * @return <code>true</code> if the input strings are equal (given the conditions passed as parameters), 
+	 *  	   <code>false</code> otherwise
 	 * @throws IllegalArgumentException if at least one of the strings is null
 	 */
-	public static boolean areEqual(String string1, String string2, int relax, boolean removeDiacritics) throws IllegalArgumentException {
+	public static boolean areEqual(String string1, String string2, int relax, boolean removeDiacritics) 
+					throws IllegalArgumentException {
 		
 		if (string1 == null || string2 == null) {
 			String message = "Invalid arguments: " + string1 + " " + string2;
@@ -31,7 +35,8 @@ public class StringUtils {
 		
 		if (relax < 0) {
 			if (logger.isDebugEnabled())
-				logger.debug("Negative relaxation parameter " + relax  + ". Setting default value to 0");
+				logger.debug("Negative relaxation parameter " + relax  + 
+				             ". Setting default value to 0");
 			relax = 0;
 		}
 		
@@ -70,11 +75,13 @@ public class StringUtils {
 	 * @param string1 the first input string
 	 * @param string2 the second input string
 	 * @param removeDiacritics specifies whether diacritics should be ignored during the comparison
-	 * @return <code>true</code> if the input strings are equal (given the conditions passed as parameters), <code>false</code> otherwise
+	 * @return <code>true</code> if the input strings are equal (given the conditions passed as parameters), 
+	 * 	   <code>false</code> otherwise
 	 * @throws IllegalArgumentException if at least one of the strings is null
 	 */
 
-	public static boolean areEqual(String string1, String string2, boolean removeDiacritics) throws IllegalArgumentException {
+	public static boolean areEqual(String string1, String string2, boolean removeDiacritics) 
+					throws IllegalArgumentException {
 		
 		return areEqual(string1, string2, 0, removeDiacritics);
 	}
@@ -84,12 +91,15 @@ public class StringUtils {
 	 * 
 	 * @param string1 the first input string
 	 * @param string2 the second input string
-	 * @param relax the maximum number of characters at the end of each input string to ignore during the comparison
-	 * @return <code>true</code> if the input strings are equal (given the conditions passed as parameters), <code>false</code> otherwise
+	 * @param relax the maximum number of characters at the end of each input string to ignore during the 
+	 * 	  comparison
+	 * @return <code>true</code> if the input strings are equal (given the conditions passed as parameters), 
+	 * 	   <code>false</code> otherwise
 	 * @throws IllegalArgumentException if at least one of the strings is null
 	 */
 
-	public static boolean areEqual(String string1, String string2, int relax) throws IllegalArgumentException {
+	public static boolean areEqual(String string1, String string2, int relax) 
+					throws IllegalArgumentException {
 		
 		return areEqual(string1, string2, relax, false);
 	}
