@@ -31,6 +31,11 @@
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
     </dependency>
+    <dependency>
+	  <groupId>nz.ac.waikato.cms.weka</groupId>
+	  <artifactId>weka-stable</artifactId>
+	  <version>3.6.6</version>
+  </dependency>
   </dependencies>
 
   <build>
