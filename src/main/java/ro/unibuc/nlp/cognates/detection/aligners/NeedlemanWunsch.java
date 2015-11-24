@@ -1,8 +1,17 @@
 package ro.unibuc.nlp.cognates.detection.aligners;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import ro.unibuc.nlp.cognates.metrics.MetricUtils;
+import ro.unibuc.nlp.cognates.utils.FileUtils;
 import ro.unibuc.nlp.cognates.utils.StringUtils;
 
 /**
@@ -54,8 +63,23 @@ public class NeedlemanWunsch implements Aligner {
 	 * @return the orthographic alignment of the strings. Example:
 	 * 		   Input: 'exhaustiv', 'esaustivo' 
 	 * 		   Output: 'exhaustiv-_es-austivo'
-	 */
+	 */	
 	public String align(String string1, String string2) {
+		
+		return align(string1, string2, "_");
+	}
+	
+	/**
+	 * Computes the Needleman-Wunsch alignment of the input strings.
+	 * 
+	 * @param string1 the first input string
+	 * @param string2 the second input string
+	 * @param separator character or sequence of characters delimiting the strings
+	 * @return the orthographic alignment of the strings. Example:
+	 * 		   Input: 'exhaustiv', 'esaustivo' 
+	 * 		   Output: 'exhaustiv-<separator>es-austivo'
+	 */
+	public String align(String string1, String string2, String separator) {
 		
 		MetricUtils.validate(string1, string2);
 		
@@ -91,7 +115,7 @@ public class NeedlemanWunsch implements Aligner {
 			} 
 		}
 
-		return aligned1 + "_" + aligned2;
+		return aligned1 + separator + aligned2;
 	}
 
 	/**
@@ -126,5 +150,27 @@ public class NeedlemanWunsch implements Aligner {
 		int[][] matrix = computeMatrix(string1, string2);
 		
 		return matrix[string1.length()][string2.length()];
+	}
+	
+	/**
+	 * Aligns all the pairs of strings from the input file
+	 * 
+	 * @param inFile input file containing pairs of strings. Format: string1<separator>string2
+	 * @param outFile output file containing the aligned string. Format: aligned1<separator>aligned2
+	 * @param separator the character or sequence of character delimiting the strings
+	 * @throws IOException
+	 */
+	public void alignFiles(String inFile, String outFile, String separator) throws IOException {
+		
+		List<String> lines = FileUtils.readLines(inFile);
+		BufferedWriter out = FileUtils.getWriter(outFile);
+
+		for (String line : lines) {
+			String left = line.split(separator)[0];
+			String right = line.split(separator)[1];
+			out.write(align(left, right, separator) + "\n");
+		}
+		
+		out.close();
 	}
 }
