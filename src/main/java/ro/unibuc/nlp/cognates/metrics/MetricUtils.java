@@ -54,12 +54,29 @@ public class MetricUtils {
 	 */
 	public static List<String> getNgrams(String string, int size) {
     	
-    	logger.info("Extracting " + size + "-grams from string" + string);
-		
+    	return getNgrams(string, size, false);
+	}
+	
+	/**
+	 * Extracts a list of n-grams from the input string.
+	 * 
+	 * @param string the input string
+	 * @param size the maximum size of the n-grams
+	 * @param range <code>true</code> if all n-gram length up to 'size' ar used,
+	 * <code>false</code> otherwise
+	 * @return a list of n-grams
+	 */
+	public static List<String> getNgrams(String string, int size, boolean range) {
+    	
 		List<String> ngrams = new LinkedList<String>();
 		
-		for (int i = 0; i <= string.length() - size; i++) {
-			ngrams.add(getNgram(string, i, size));
+		for (int j = 1; j <= size; j++) {
+			logger.info("Extracting " + j + "-grams from string" + string);
+			for (int i = 0; i <= string.length() - size; i++) {
+				String ngram = getNgram(string, i, size); 
+				if (!"".equals(ngram))
+					ngrams.add(ngram);
+			}
 		}
 		
 		return ngrams;
