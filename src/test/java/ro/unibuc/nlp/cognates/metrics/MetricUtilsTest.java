@@ -51,4 +51,23 @@ public class MetricUtilsTest {
 		expected = new String[]{};
 		Assert.assertArrayEquals(actual, expected);			
 	}
+	
+	@Test
+	public void testNgramsRange() {
+		
+		// 2-grams
+		List<String> ngrams = MetricUtils.getNgrams("lingua", 2, true);
+		String[] actual = ngrams.toArray(new String[ngrams.size()]) ;
+		String[] expected = new String[]{"l", "i", "n", "g", "u", "a", 
+										 "li", "in", "ng", "gu", "ua"};
+		Assert.assertArrayEquals(actual, expected);
+		
+		// 3-grams
+		ngrams = MetricUtils.getNgrams("lingua", 3, true);
+		actual = ngrams.toArray(new String[ngrams.size()]) ;
+		expected = new String[]{"l", "i", "n", "g", "u", "a",
+								"li", "in", "ng", "gu", "ua",
+								"lin", "ing", "ngu", "gua"};
+		Assert.assertArrayEquals(actual, expected);		
+	}
 }

@@ -70,10 +70,14 @@ public class MetricUtils {
     	
 		List<String> ngrams = new LinkedList<String>();
 		
-		for (int j = 1; j <= size; j++) {
+		int start = size;
+		if (range)
+			start = 1;
+		
+		for (int j = start; j <= size; j++) {
 			logger.info("Extracting " + j + "-grams from string" + string);
-			for (int i = 0; i <= string.length() - size; i++) {
-				String ngram = getNgram(string, i, size); 
+			for (int i = 0; i <= string.length() - j; i++) {
+				String ngram = getNgram(string, i, j); 
 				if (!"".equals(ngram))
 					ngrams.add(ngram);
 			}
