@@ -57,6 +57,8 @@ public class FileUtils {
         while ((line = in.readLine()) != null) {
             lines.add(line);
         }
+        
+        in.close();
 
         return lines;
     }
