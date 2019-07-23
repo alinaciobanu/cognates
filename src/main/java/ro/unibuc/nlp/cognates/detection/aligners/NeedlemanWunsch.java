@@ -1,18 +1,14 @@
 package ro.unibuc.nlp.cognates.detection.aligners;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.charset.Charset;
-import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import ro.unibuc.nlp.cognates.metrics.MetricUtils;
 import ro.unibuc.nlp.cognates.utils.FileUtils;
 import ro.unibuc.nlp.cognates.utils.StringUtils;
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.text.Normalizer;
+import java.util.List;
 
 /**
  * Aligns strings using the Needleman-Wunsch algorithm.
@@ -166,6 +162,7 @@ public class NeedlemanWunsch implements Aligner {
 		BufferedWriter out = FileUtils.getWriter(outFile);
 
 		for (String line : lines) {
+			line = Normalizer.normalize(line, Normalizer.Form.NFKC);
 			String left = line.split(separator)[0];
 			String right = line.split(separator)[1];
 			out.write(align(left, right, separator) + "\n");
