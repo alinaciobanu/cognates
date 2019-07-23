@@ -1,5 +1,7 @@
 package ro.unibuc.nlp.cognates.metrics;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -79,5 +81,12 @@ public class Hamming implements Metric {
 		}
 		
 		return 1 - distance/maxLength;
+	}
+
+	@Override
+	public double computeDistance(List<String> a, List<String> b)
+			throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

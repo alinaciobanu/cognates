@@ -1,6 +1,7 @@
 package ro.unibuc.nlp.cognates.metrics;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -111,5 +112,12 @@ public class Dice implements Metric {
 		logger.info("Computing the Dice similiarity between strings " + a + " " + b + " using 2-grams");
 		
 		return computeDice(a, b, 2);
+	}
+
+	@Override
+	public double computeDistance(List<String> a, List<String> b)
+			throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

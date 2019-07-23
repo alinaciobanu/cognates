@@ -1,6 +1,7 @@
 package ro.unibuc.nlp.cognates.metrics;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -103,5 +104,12 @@ public class Jaccard implements Metric {
 		
 		double similarity = computeJaccard(a, b, 2);
 		return 1 - similarity;
+	}
+
+	@Override
+	public double computeDistance(List<String> a, List<String> b)
+			throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

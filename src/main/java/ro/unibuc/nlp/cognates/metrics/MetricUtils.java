@@ -18,18 +18,18 @@ public class MetricUtils {
 	private static final Logger logger = Logger.getLogger(MetricUtils.class);
 	
     /**
-     * Validates that the input strings are not null.
+     * Validates that the input objects are not null.
      * 
-     * @param a first input string
-     * @param b second input string
+     * @param a first input object
+     * @param b second input object
      * @throws IllegalArgumentException
      */
-    public static void validate(String a, String b)  throws IllegalArgumentException {    	
+    public static void validate(Object a, Object b)  throws IllegalArgumentException {    	
 
-    	logger.info("Validating input strings: [" + a + ", " + b + "]");
+    	logger.info("Validating input objects: [" + a + ", " + b + "]");
     	
     	if (a == null || b == null) {
-    		throw new IllegalArgumentException("Input strings cannot be null.");
+    		throw new IllegalArgumentException("Input objects cannot be null.");
     	}
     }
     
@@ -66,6 +66,28 @@ public class MetricUtils {
 	 * <code>false</code> otherwise
 	 * @return a list of n-grams
 	 */
+	public static List<String> getSentenceNgrams(String string, int size, boolean range) {
+    	
+		List<String> ngrams = new LinkedList<String>();
+		
+		string = string.replaceAll("\\s+", "_");
+		
+		int start = size;
+		if (range)
+			start = 1;
+		
+		for (int j = start; j <= size; j++) {
+			logger.info("Extracting " + j + "-grams from string" + string);
+			for (int i = 0; i <= string.length() - j; i++) {
+				String ngram = getNgram(string, i, j); 
+				if (!"".equals(ngram))
+					ngrams.add(ngram);
+			}
+		}
+		
+		return ngrams;
+	}
+	
 	public static List<String> getNgrams(String string, int size, boolean range) {
     	
 		List<String> ngrams = new LinkedList<String>();
@@ -78,6 +100,42 @@ public class MetricUtils {
 			logger.info("Extracting " + j + "-grams from string" + string);
 			for (int i = 0; i <= string.length() - j; i++) {
 				String ngram = getNgram(string, i, j); 
+				if (!"".equals(ngram))
+					ngrams.add(ngram);
+			}
+		}
+		
+		return ngrams;
+	}
+	
+	public static List<String> getNgrams(List<String> list, int size, boolean range) {
+    	
+		List<String> ngrams = new LinkedList<String>();
+		
+		int start = size;
+		if (range)
+			start = 1;
+		
+		for (int j = start; j <= size; j++) {
+			logger.info("Extracting " + j + "-grams from string" + list);
+			for (int i = 0; i <= list.size() - j; i++) {
+				String ngram = getNgram(list, i, j); 
+				if (!"".equals(ngram))
+					ngrams.add(ngram);
+			}
+		}
+		
+		return ngrams;
+	}
+	
+	public static List<String> getNgrams(List<String> list, int minSize, int maxSize, boolean range) {
+    	
+		List<String> ngrams = new LinkedList<String>();
+		
+		for (int j = minSize; j <= maxSize; j++) {
+			logger.info("Extracting " + j + "-grams from string" + list);
+			for (int i = 0; i <= list.size() - j; i++) {
+				String ngram = getNgram(list, i, j); 
 				if (!"".equals(ngram))
 					ngrams.add(ngram);
 			}
@@ -103,6 +161,20 @@ public class MetricUtils {
 			
 		for (int i = 0; i < size; i++) {
 			ngram += string.charAt(start + i);
+		}
+		
+		return ngram;
+	}
+    
+    public static String getNgram(List<String> list, int start, int size) {
+		
+		String ngram = "";
+		
+		if (list == null || start + size > list.size())
+			return ngram;
+			
+		for (int i = 0; i < size; i++) {
+			ngram += ("".equals(ngram) ? "" : "_") + list.get(start + i);
 		}
 		
 		return ngram;
@@ -146,8 +218,30 @@ public class MetricUtils {
     	
     	return sequence;
     }
+	
+	public static List<String> getAdjacentNgrams(String string, int size, boolean range) {
+    	
+		List<String> ngrams = new LinkedList<String>();
+		
+		int start = size;
+		if (range)
+			start = 1;
+		
+		for (int j = start; j <= size; j++) {
+			logger.info("Extracting adjacent " + j + "-grams from string" + string);
+			for (int i = 0; i <= string.length() - j; i += size) {
+				String ngram = getNgram(string, i, j); 
+				if (!"".equals(ngram))
+					ngrams.add(ngram);
+			}
+		}
+		
+		return ngrams;
+	}
     
     public static void main(String[] args) {
     	validate("123", "456");
+    	
+    	System.out.println(getAdjacentNgrams("alinutzab", 2, false));
     }
 }
