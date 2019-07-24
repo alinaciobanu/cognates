@@ -1,6 +1,6 @@
 # Cognates
 
-My work on related words and language similarity. 
+Our work on related words and language similarity. The main topics addressed by this project are the automatic identification and production of related words.
 
 **Requirements**
 
