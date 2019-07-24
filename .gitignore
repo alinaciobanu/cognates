@@ -6,6 +6,7 @@
 
 # executable files
 *.exe
+*.sh
 
 # log folder
 /log
@@ -17,3 +18,9 @@
 /.settings
 .classpath
 .project
+
+# vm crash logs
+hs_err_pid*
+
+# temporary files
+.fuse_hidden*
