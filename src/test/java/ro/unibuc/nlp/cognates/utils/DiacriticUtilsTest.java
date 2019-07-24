@@ -1,5 +1,7 @@
 package ro.unibuc.nlp.cognates.utils;
 
+import java.text.Normalizer;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,17 +13,18 @@ public class DiacriticUtilsTest {
 
 	@Test
 	public void testRemoveDiacritics() {
-		
+
 		Assert.assertEquals("aistaAISTA", DiacriticUtils.removeDiacritics("ăîșțâĂÎȘȚÂ"));
 		Assert.assertEquals("aistaAISTA", DiacriticUtils.removeDiacritics("aistaAISTA"));
 		Assert.assertEquals("", DiacriticUtils.removeDiacritics(""));
 		Assert.assertNull(DiacriticUtils.removeDiacritics(null));
+		Assert.assertEquals("aistaAISTA", org.apache.commons.lang3.StringUtils.stripAccents("ăîșțâĂÎȘȚÂ"));
 	}
 	
 	@Test
 	public void testRemoveAllDiacritics() {
 		
-Lemmas lemmas = new Lemmas();
+		Lemmas lemmas = new Lemmas();
 		
 		Origin origin = new Origin();
 		origin.setLanguage("language1ăîșțâ");

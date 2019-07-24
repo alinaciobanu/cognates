@@ -1,5 +1,7 @@
 package ro.unibuc.nlp.cognates.metrics;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,6 +25,11 @@ public class LcsrTest extends MetricTest {
 		Assert.assertEquals(0.67, metric.computeSimilarity("langue", "lingua"), DELTA);
 		Assert.assertEquals(0.58, metric.computeSimilarity("spera", "espérer"), DELTA);
 		Assert.assertEquals(0.50, metric.computeSimilarity("an", "anno"), DELTA);
+		
+		// distance for lists
+		Assert.assertEquals(0.33, metric.computeDistance(Arrays.asList("l", "a", "n", "g", "u", "e"), Arrays.asList("l", "i", "n", "g", "u", "a")), DELTA);
+		Assert.assertEquals(0.42, metric.computeDistance(Arrays.asList("s", "p", "e", "r", "a"), Arrays.asList("e", "s", "p", "é", "r", "e", "r")), DELTA);
+		Assert.assertEquals(0.50, metric.computeDistance(Arrays.asList("a", "n"), Arrays.asList("a", "n", "n", "o")), DELTA);
 	}
 
 	@Test
